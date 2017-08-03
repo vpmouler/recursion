@@ -42,7 +42,7 @@ function loopNumber(number) {
 	return number.toString();
 }
 
-console.log(typeof loopNumber(123)) // string
+// console.log(typeof loopNumber(123)) // string
 
 // using loop to stringify array
 
@@ -57,8 +57,18 @@ function loopArray(array) {
 	return '[' + string + ']';
 }
 
-console.log(loopArray([1,2,"seva"])) //[1,2,seva]
-console.log(typeof loopArray([1,2,"seva"])) 
+// console.log(loopArray([1,2,"seva"])) //[1,2,seva]
+// console.log(typeof loopArray([1,2,"seva"]))  // string
 
 //using recurion
+
+function recursionArray(array) {
+	//base case
+	if ( array.length == 0 ) {
+		return '['+array+']';
+	}
+	else {
+		recursionArray()
+	}
+}
 
