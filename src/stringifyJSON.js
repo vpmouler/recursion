@@ -72,3 +72,38 @@ function recursionArray(array) {
 	}
 }
 
+/*
+console.log(JSON.stringify('seva'))// "seva"
+console.log('seva'); //seva
+
+console.log(JSON.stringify(23)) // 23
+console.log(23) // 23
+
+console.log(JSON.stringify([1,2,'seva'])) //[1,2,"seva"]
+console.log([1,2,'seva']) //[ 1, 2, 'seva' ]
+
+console.log(JSON.stringify({name: 'seva', age: 25, 'sex': 'male'})) // {"name":"seva","age":25,"sex":"male"}
+console.log({name: 'seva', age: 25, 'sex': 'male'}) // { name: 'seva', age: 25, sex: 'male' }
+*/
+
+function objectStringify(obj) {
+	var string = '';
+	for ( var key in obj ) {
+		console.log(typeof key, typeof obj[key]);
+		string += '"' + key + '":"' + obj[key] + '",';
+	}
+	return '{' + string + '}';
+};
+
+var object = 
+console.log(objectStringify({name: 'seva', age: 25, 'sex': 'male'}));
+
+function objectStringifyRecursion(obj) {
+	//base case
+		// if return call is not a string;
+
+	//recurisve case
+}
+
+
+
