@@ -95,15 +95,63 @@ function objectStringify(obj) {
 	return '{' + string + '}';
 };
 
-var object = 
+var object = {name: 'seva', age: 25, 'sex': 'male'}
 console.log(objectStringify({name: 'seva', age: 25, 'sex': 'male'}));
 
 function objectStringifyRecursion(obj) {
+	var string = '';
 	//base case
-		// if return call is not a string;
-
+		// if return call is not a string or number
+		// then return empty string ""
+	var recurisveLoopObject = function (strOrNum) {
+		if ( obj !== typeof string || obj !== typeof number ) { // check if type is array/obj in case there are nested
+			return '';
+		} else {
 	//recurisve case
+			return recurisveLoopObject() // find object methods
+		}
+	}
+
 }
+
+// console.log(Object.entries(object));
+var obj = { foo: 'bar', baz: 42 };
+// console.log(Object.entries(obj)); // ERROR
+console.log(typeof Object.getOwnPropertyNames(obj));
+console.log(typeof Object.keys(obj)[0]); // stirng [0]
+
+
+var array = ["seva","peter","bert"]; // recursively add to a new stirng
+
+function recursiveArrToStr(array) {
+	//base case
+		// array.length == 0
+	if ( array.length === 0 ) {
+		return '';
+	}
+	// recursive case
+	return array[0] + recursiveArrToStr(array.slice(1))
+}
+
+console.log(recursiveArrToStr(array));
+
+
+function recursiveObjToStr(obj) {
+	var objectKeys = Object.keys(obj);
+	var recursion = function(arr) {
+	// base case
+		if ( arr.length === 0 ) {
+			return '';
+		}
+		return arr[0] + obj[arr[0]] + recursiveObjToStr(objectKeys.slice(1));
+	}
+	return recursion(objectKeys);
+}
+
+console.log(recursiveObjToStr(obj))
+
+new Set([1,2,3]);
+console.log()
 
 
 
