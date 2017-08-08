@@ -38,6 +38,7 @@ var stringifyJSON = function(obj) {
 // // console.log(string1[0])
 
 //using loop to make number a string
+/*
 function loopNumber(number) {
 	return number.toString();
 }
@@ -71,7 +72,7 @@ function recursionArray(array) {
 		recursionArray()
 	}
 }
-
+*/
 /*
 console.log(JSON.stringify('seva'))// "seva"
 console.log('seva'); //seva
@@ -121,6 +122,7 @@ console.log(typeof Object.getOwnPropertyNames(obj));
 console.log(typeof Object.keys(obj)[0]); // stirng [0]
 */
 
+/*
 var array = ["seva","peter","bert"]; // recursively add to a new stirng
 
 function recursiveArrToStr(array) {
@@ -133,11 +135,10 @@ function recursiveArrToStr(array) {
 	return array[0] + recursiveArrToStr(array.slice(1))
 }
 
-console.log(JSON.stringify(array))
-console.log(recursiveArrToStr(array));
+// console.log(JSON.stringify(array))
+// console.log(recursiveArrToStr(array));
+*/
 
-
-var objectMe = {name: 'seva', age: 25, 'sex': {butt:23}};
 /*
 function recursiveObjToStr(obj) {
 	var objectKeys = Object.keys(obj);
@@ -151,7 +152,7 @@ function recursiveObjToStr(obj) {
 	return recursion(objectKeys);
 }
 */
-
+/*
 function recursiveObjToStr(obj) {
 	var objectKeys = Object.keys(obj);
 	var emptyString = '';
@@ -162,14 +163,14 @@ function recursiveObjToStr(obj) {
 	return '{' + emptyString + '}';
 }
 
-console.log(recursiveObjToStr(objectMe))
+// console.log(recursiveObjToStr(objectMe))
 
-var nestedArray = [undefined,2,['seva','bert',[123]], true];
 
-console.log(recursiveArrToStr(nestedArray));
 
-function stringifyJSON(obj) {
-	var emptyString = '';
+// console.log(recursiveArrToStr(nestedArray));
+*/
+var stringifyJSON = function(obj) {
+	// var emptyString = '';
 	var ifArray = [];
 	var ifObject = [];
 	if ( typeof obj === 'number') { // why add space '' allows null?
@@ -178,7 +179,7 @@ function stringifyJSON(obj) {
 	if ( typeof obj === 'string' ) {
 		return '"' + obj + '"';
 	}
-	if ( obj === null || obj === undefined) {
+	if ( obj === null || obj === undefined ) {
 		return 'null';
 	}
 	if ( obj === true ) {
@@ -198,8 +199,39 @@ function stringifyJSON(obj) {
 			return '[' + ifArray + ']'; // why adding brackets removes brackets around nested object and removes spaces?
 		}
 	}
+	if ( typeof obj === 'object' ) {
+		var objectKeys = Object.keys(obj);
+		// console.log(objectKeys)
+		objectKeys.forEach(function(element) {
+			// if ( obj[element] )
+			if ( typeof obj[element] === 'number' || obj[element] === null || obj[element] === true || obj[element] === false ) {
+				ifObject.push(stringifyJSON(element)+':'+obj[element])
+			} else {
+				ifObject.push(stringifyJSON(element)+':"'+obj[element]+'"')
+			}
+		})
+		return '{' + ifObject + '}';
+	}
 }
 
 
-console.log(stringifyJSON(nestedArray));
-console.log(JSON.stringify(nestedArray));
+
+var nestedArray = [undefined,2,['seva','bert',[123]], true];
+var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
+
+// console.log(stringifyJSON(nestedArray));
+// console.log(JSON.stringify(nestedArray));
+
+var arrayAndObject = ["seva", {name: 'bert'}]
+
+console.log(stringifyJSON(objectMe));
+console.log(JSON.stringify(objectMe));
+
+console.log(stringifyJSON(arrayAndObject));
+console.log(JSON.stringify(arrayAndObject));
+
+var nestedArrObj = [{name:'seva',age: null, boss: true, cool: 29}]
+
+console.log(stringifyJSON(nestedArrObj));
+console.log(JSON.stringify(nestedArrObj));
+
