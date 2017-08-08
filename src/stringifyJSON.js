@@ -119,7 +119,7 @@ var obj = { foo: 'bar', baz: 42 };
 // console.log(Object.entries(obj)); // ERROR
 console.log(typeof Object.getOwnPropertyNames(obj));
 console.log(typeof Object.keys(obj)[0]); // stirng [0]
-
+*/
 
 var array = ["seva","peter","bert"]; // recursively add to a new stirng
 
@@ -133,10 +133,11 @@ function recursiveArrToStr(array) {
 	return array[0] + recursiveArrToStr(array.slice(1))
 }
 
+console.log(JSON.stringify(array))
 console.log(recursiveArrToStr(array));
-*/
 
-var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
+
+var objectMe = {name: 'seva', age: 25, 'sex': {butt:23}};
 /*
 function recursiveObjToStr(obj) {
 	var objectKeys = Object.keys(obj);
@@ -163,7 +164,42 @@ function recursiveObjToStr(obj) {
 
 console.log(recursiveObjToStr(objectMe))
 
+var nestedArray = [undefined,2,['seva','bert',[123]], true];
+
+console.log(recursiveArrToStr(nestedArray));
+
+function stringifyJSON(obj) {
+	var emptyString = '';
+	var ifArray = [];
+	var ifObject = [];
+	if ( typeof obj === 'number') { // why add space '' allows null?
+		return obj;
+	}
+	if ( typeof obj === 'string' ) {
+		return '"' + obj + '"';
+	}
+	if ( obj === null || obj === undefined) {
+		return 'null';
+	}
+	if ( obj === true ) {
+		return 'true';
+	}
+	if ( obj === false ) {
+		return 'false';
+	}
+	if ( Array.isArray(obj) ) {
+		//base case
+		if ( obj.length === 0 ) {
+			return '[]';
+		} else {
+			obj.forEach(function(element) {
+				ifArray.push(stringifyJSON(element));
+			});
+			return '[' + ifArray + ']'; // why adding brackets removes brackets around nested object and removes spaces?
+		}
+	}
+}
 
 
-
-
+console.log(stringifyJSON(nestedArray));
+console.log(JSON.stringify(nestedArray));
