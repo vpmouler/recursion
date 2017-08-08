@@ -85,7 +85,7 @@ console.log([1,2,'seva']) //[ 1, 2, 'seva' ]
 console.log(JSON.stringify({name: 'seva', age: 25, 'sex': 'male'})) // {"name":"seva","age":25,"sex":"male"}
 console.log({name: 'seva', age: 25, 'sex': 'male'}) // { name: 'seva', age: 25, sex: 'male' }
 */
-
+/*
 function objectStringify(obj) {
 	var string = '';
 	for ( var key in obj ) {
@@ -134,8 +134,10 @@ function recursiveArrToStr(array) {
 }
 
 console.log(recursiveArrToStr(array));
+*/
 
-
+var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
+/*
 function recursiveObjToStr(obj) {
 	var objectKeys = Object.keys(obj);
 	var recursion = function(arr) {
@@ -147,11 +149,21 @@ function recursiveObjToStr(obj) {
 	}
 	return recursion(objectKeys);
 }
+*/
 
-console.log(recursiveObjToStr(obj))
+function recursiveObjToStr(obj) {
+	var objectKeys = Object.keys(obj);
+	var emptyString = '';
+	objectKeys.forEach(function(element, index) {
+		emptyString += '"' + objectKeys[index] + '":"' + obj[objectKeys[index]] + '"'
+	});
+	// base case
+	return '{' + emptyString + '}';
+}
 
-new Set([1,2,3]);
-console.log()
+console.log(recursiveObjToStr(objectMe))
+
+
 
 
 
