@@ -213,8 +213,9 @@ var stringifyJSON = function(obj) {
 			} else if ( typeof obj[element] === 'object' ) {
 				ifObject.push(stringifyJSON(element) + ':' + stringifyJSON(obj[element]));
 			} 
-			else if ( typeof obj[element] === 'function' || typeof obj[element] ) {
-				ifObject.push('{}');
+			else if ( typeof obj[element] === 'function' || typeof obj[element] === 'undefined') {
+				// ifObject.push('{}');
+				return '{}';
 			} 
 			else {
 				ifObject.push(stringifyJSON(element)+':"'+obj[element]+'"')
@@ -226,10 +227,11 @@ var stringifyJSON = function(obj) {
 
 
 var objectWFunc = {'name': function() {return 'h'}, age: undefined};
+var objEmpty = {};
 
 console.log(JSON.stringify(objectWFunc)) // {}
-
-console.log(typeof objectWFunc.name)
+console.log(JSON.stringify(objEmpty));
+console.log(typeof objectWFunc.age)
 
 // var nestedArray = [undefined,2,['seva','bert',[123]], true];
 // var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
