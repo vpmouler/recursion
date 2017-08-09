@@ -173,8 +173,8 @@ var stringifyJSON = function(obj) {
 	// var emptyString = '';
 	var ifArray = [];
 	var ifObject = [];
-	if ( typeof obj === 'number') { // why add space '' allows null?
-		return obj;
+	if ( typeof obj === 'number' ) { // || typeof obj === Boolean) { // why add space '' allows null?
+		return obj.toString(); // return obj return '' + obj // obj === null 'null' return obj 
 	}
 	if ( typeof obj === 'string' ) {
 		return '"' + obj + '"';
@@ -196,7 +196,8 @@ var stringifyJSON = function(obj) {
 			obj.forEach(function(element) {
 				ifArray.push(stringifyJSON(element));
 			});
-			return '[' + ifArray + ']'; // why adding brackets removes brackets around nested object and removes spaces?
+			//return '[' + ifArray + ']'; // why adding brackets removes brackets around nested object and removes spaces?
+			return '[' + ifArray.toString() + ']';
 		}
 	}
 	if ( typeof obj === 'object' ) {
@@ -210,28 +211,38 @@ var stringifyJSON = function(obj) {
 				ifObject.push(stringifyJSON(element)+':"'+obj[element]+'"')
 			}
 		})
-		return '{' + ifObject + '}';
+		return '{' + ifObject.toString() + '}';
 	}
 }
 
 
 
-var nestedArray = [undefined,2,['seva','bert',[123]], true];
-var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
+// var nestedArray = [undefined,2,['seva','bert',[123]], true];
+// var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
 
-// console.log(stringifyJSON(nestedArray));
+// // console.log(stringifyJSON(nestedArray));
+// // console.log(JSON.stringify(nestedArray));
+
+// var arrayAndObject = ["seva", {name: 'bert'}]
+
+// console.log(stringifyJSON(nestedArray)); 
+// //[null,2,["seva","bert",[123]],true] // w/ brackets
+// //[ 'null', '2', [ '"seva"', '"bert"', [ '123' ] ], 'true' ] // w/o brackets
 // console.log(JSON.stringify(nestedArray));
+// [null,2,["seva","bert",[123]],true]
 
-var arrayAndObject = ["seva", {name: 'bert'}]
 
-console.log(stringifyJSON(objectMe));
-console.log(JSON.stringify(objectMe));
 
-console.log(stringifyJSON(arrayAndObject));
-console.log(JSON.stringify(arrayAndObject));
+// console.log(stringifyJSON(objectMe));
+// console.log(JSON.stringify(objectMe));
 
-var nestedArrObj = [{name:'seva',age: null, boss: true, cool: 29}]
+// console.log(stringifyJSON(arrayAndObject));
+// console.log(JSON.stringify(arrayAndObject));
 
-console.log(stringifyJSON(nestedArrObj));
-console.log(JSON.stringify(nestedArrObj));
+// var nestedArrObj = [{name:'seva',age: null, boss: true, cool: 29}]
+
+// console.log(stringifyJSON(nestedArrObj));
+// console.log(JSON.stringify(nestedArrObj));
+
+// console.log();
 
