@@ -188,6 +188,9 @@ var stringifyJSON = function(obj) {
 	if ( obj === false ) {
 		return 'false';
 	}
+	if ( typeof obj === 'function' ) {
+		return '{}';
+	}
 	if ( Array.isArray(obj) ) {
 		//base case
 		if ( obj.length === 0 ) {
@@ -207,7 +210,13 @@ var stringifyJSON = function(obj) {
 			// if ( obj[element] )
 			if ( typeof obj[element] === 'number' || obj[element] === null || obj[element] === true || obj[element] === false ) {
 				ifObject.push(stringifyJSON(element)+':'+obj[element])
-			} else {
+			} else if ( typeof obj[element] === 'object' ) {
+				ifObject.push(stringifyJSON(element) + ':' + stringifyJSON(obj[element]));
+			} 
+			else if ( typeof obj[element] === 'function' || typeof obj[element] ) {
+				ifObject.push('{}');
+			} 
+			else {
 				ifObject.push(stringifyJSON(element)+':"'+obj[element]+'"')
 			}
 		})
@@ -216,6 +225,11 @@ var stringifyJSON = function(obj) {
 }
 
 
+var objectWFunc = {'name': function() {return 'h'}, age: undefined};
+
+console.log(JSON.stringify(objectWFunc)) // {}
+
+console.log(typeof objectWFunc.name)
 
 // var nestedArray = [undefined,2,['seva','bert',[123]], true];
 // var objectMe = {name: 'seva', age: 25, 'sex': 'male'};
