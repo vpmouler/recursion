@@ -226,7 +226,7 @@ var stringifyJSON = function(obj) {
 }
 
 
-var objectWFunc = {'name': function() {return 'h'}, age: undefined};
+var objectWFunc = {'name': function() {return 'h'}, age: undefined, hei: 'ase'};
 var objEmpty = {};
 
 console.log(JSON.stringify(objectWFunc)) // {}
