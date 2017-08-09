@@ -9,7 +9,7 @@ var getElementsByClassName = function(className) {
   var documentBody = document.body;
   var arrayOfElements = [];
   var recursion = function(node) {
-  	if ( node.classList.contains(className) ) {
+  	if ( node.classList && node.classList.contains(className) ) {
   		arrayOfElements.push(node);
   	}
   	node.childNodes.forEach(function(ele) {
